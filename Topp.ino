@@ -54,7 +54,7 @@ int rotation_direction = 1;
 int rotation_duration = 1000;
 int next_move_length = 1000;
 int next_move_direction = 0;
-int speed = step_delay = 500; //microseconds
+int step_delay = 500; //microseconds
 
 bool drop_lighter_signal = false;
 
