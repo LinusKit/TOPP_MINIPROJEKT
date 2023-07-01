@@ -107,7 +107,7 @@ void loop(){
 
 }
 
-void littleMove(int move_length, int move_direction, int speed){
+void littleMove(int move_length, int move_direction, int move_step_delay){
   //load number of skipped steps for this direction for each stepper
   int *axis_steps = gaps[move_direction];
   //load forward or backward direction for each stepper
@@ -125,7 +125,7 @@ void littleMove(int move_length, int move_direction, int speed){
   }
 
   //do certain amount of steps and use only specific
-  for(int i=0; i<steps; i++){
+  for(int i=0; i<move_length; i++){
     
       //for each axis
       for(int ax=0; ax<3; ax++){
@@ -142,7 +142,7 @@ void littleMove(int move_length, int move_direction, int speed){
               motor[ax]->step();
           }
       }
-    delayMicroseconds(speed);
+    delayMicroseconds(move_step_delay);
   } 
 }
 
@@ -178,7 +178,7 @@ void rotate(int steps, int direction, int step_delay){
 
 void drop(){
   int j = servoStartPosB;
-  for(int i=servoStartPosA;i<servoStopPosA; i++){
+  for(int i=servoStartPosA;i<servoEndPosA; i++){
     j++;
     servoA.write(i);
     servoB.write(j);
